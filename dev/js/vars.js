@@ -1,0 +1,6 @@
+// NAV
+
+var eastBtn,
+    westBtn;
+  
+
