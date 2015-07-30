@@ -8,7 +8,7 @@ function scene() {//src, n, s, e, w) {
   this.west = "";
   
   this.init = function(src, n, s, e, w) {
-    this.videoSrc = "assets/videos/"+src;
+    this.videoSrc = "assets/videos/"+src+".mp4";
     this.north = n;
     this.south = s;
     this.east = e;
@@ -17,8 +17,7 @@ function scene() {//src, n, s, e, w) {
   
   this.changeVid = function() {
     var player = document.getElementById("player"),
-        oldSource = document.getElementById("source"),
-        newSource = document.createElement("source"),
+        vidSource = document.getElementById("source"),
         
         // Get new values from this object's properties
         newVid = this.videoSrc,
@@ -28,23 +27,13 @@ function scene() {//src, n, s, e, w) {
         newWest = this.west;
         
     // Handle switching video sources to the new one
-    oldSource.remove();
     
-    newSource.setAttribute("src", newVid);
-    newSource.setAttribute("id", "source");
-    
-    player.appendChild(newSource);
-    
+    vidSource.setAttribute("src", newVid);
     player.load();
+    //player.play();
     
+    // Set the current scene to this new one (nav controls are in relation to the current scene)
     currentScene = this;
-    
-    // Handle switching navigation
-    /*if(newEast) {
-      eastBtn.onclick = newEast.changeVid;
-    } if (newWest) {
-      westBtn.onclick = newWest.changeVid;
-    }*/
     
   };
 }
@@ -54,8 +43,8 @@ function scene() {//src, n, s, e, w) {
 var easttest = new scene(),
     westtest = new scene(),
     defaultVid = new scene(),
-    currentScene;
+    currentScene = new scene();
     
-easttest.init("east.mp4", "", "", "", defaultVid);
-westtest.init("west.mp4", "", "", defaultVid, "");
-defaultVid.init("default.mp4", "", "", easttest, westtest);
+easttest.init("east", "", "", "", defaultVid);
+westtest.init("west", "", "", defaultVid, "");
+defaultVid.init("default", "", "", easttest, westtest);
