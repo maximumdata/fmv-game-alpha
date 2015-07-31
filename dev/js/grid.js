@@ -56,4 +56,4 @@ function grid(size) {
   } else { var gC = document.getElementById("gridContainer"); gC.remove(); gridOnOff = 0; }
 }
 
-var debug = function() { grid(); };
+var debug = function(gridSize) { grid(gridSize); };
