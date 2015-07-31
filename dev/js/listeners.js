@@ -16,16 +16,28 @@ function addEvent(to, type, fn) {
 addEvent(window, "load", function() {
   eastBtn = document.getElementById("east");
   westBtn = document.getElementById("west");
+  northBtn = document.getElementById("north");
+  southBtn = document.getElementById("south");
+  play = document.getElementById("play");
   
   addEvent(play, "click", function() {
-    defaultVid.changeVid();
+    x0y0.changeScene();
+    this.remove();
   });
   
   addEvent(eastBtn, "click", function() {
-    currentScene.east.changeVid();
+    currentScene.east.changeScene();
   });
   
   addEvent(westBtn, "click", function() {
-    currentScene.west.changeVid();
+    currentScene.west.changeScene();
+  });
+  
+  addEvent(northBtn, "click", function() {
+    currentScene.north.changeScene();
+  });
+  
+  addEvent(southBtn, "click", function() {
+    currentScene.south.changeScene();
   });
 });

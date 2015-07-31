@@ -1,2 +1,37 @@
 body
-  margin: 10px
+  margin: 0
+  overflow: hidden
+  //position: relative
+#player
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 1
+  width: auto
+  height: auto
+  min-width: 100%
+  min-height: 100%
+  
+button  
+  padding: 10px 15px
+  font-size: 14px
+  &:focus
+    outline: 0
+    
+.navBtn
+  z-index: 2
+  position: absolute
+  display: none
+  background: rgba(0,0,0,.75)
+  color: white
+  border: 0
+  
+  
+#play
+  z-index: 2
+  display: block
+  position: absolute
+  bottom: 10px
+  left: 49%
