@@ -1,11 +1,6 @@
 // CONSTRUCTOR
 
 function scene() {
-  /*this.videoSrc = "";
-  this.north = "";
-  this.south = "";
-  this.east = "";
-  this.west = "";*/
   
   // construct an object to hold the scene's navigation. needs to contain positional information for each navigation element.
   function nav(p) {
