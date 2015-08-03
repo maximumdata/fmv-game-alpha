@@ -21,7 +21,7 @@ addEvent(window, "load", function() {
   play = document.getElementById("play");
   
   addEvent(play, "click", function() {
-    x0y0.changeScene();
+    changeMap(newmap);
     this.remove();
   });
   
