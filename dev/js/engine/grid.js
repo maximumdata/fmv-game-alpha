@@ -55,6 +55,3 @@ function grid(size) {
     gridOnOff = 1;
   } else { var gC = document.getElementById("gridContainer"); gC.remove(); gridOnOff = 0; }
 }
-
-var debug = function(gridSize) { grid(gridSize); };
-

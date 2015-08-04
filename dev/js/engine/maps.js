@@ -1,5 +1,5 @@
 // global variables -- to track game information
-var currentMap;// = new map("","","");
+var currentMap;
 
 function changeMap(newMap) {
   currentMap = newMap;
@@ -38,12 +38,10 @@ function map(maxX, maxY, start) {
     // construct an object to hold the scene's navigation. needs to contain positional information for each navigation element.
     function nav(p, navElements) {
       this.parentScene = p;
-      this.navElementList = navElements;
       
       this.init = function() {
-        var indexRem, index,
-            existingNavElements = document.getElementsByClassName("navBtn"),
-            navElements = this.navElementList;
+        var index,
+            existingNavElements = document.getElementsByClassName("navBtn");
         
         if(existingNavElements.length) {    
           while(existingNavElements.length > 0) {
@@ -51,81 +49,23 @@ function map(maxX, maxY, start) {
           }
         }
         
-        for(index = 0; index < navElements.length; index++) {
-          var newNavEl = document.createElement("BUTTON");
-          newNavEl.setAttribute("class", "navBtn");
-          newNavEl.style.top = navElements[index][0]+"%";
-          newNavEl.style.right = navElements[index][1]+"%";
-          newNavEl.style.bottom = navElements[index][2]+"%";
-          newNavEl.style.left = navElements[index][3]+"%";
-          newNavEl.sceneToChangeTo = navElements[index][4];
-          document.body.appendChild(newNavEl);
-          addEvent(newNavEl, "click", function(){
-            newNavEl.sceneToChangeTo.changeScene();
-          });
-          //var test = document.getElementsByClassName("navBtn"); console.log(test[0].sceneToChangeTo);
+        if(navElements) {
+          for(index = 0; index < navElements.length; index++) {
+            var newNavEl = document.createElement("BUTTON");
+            newNavEl.setAttribute("class", "navBtn");
+            newNavEl.style.top = navElements[index][0]+"%";
+            newNavEl.style.right = navElements[index][1]+"%";
+            newNavEl.style.bottom = navElements[index][2]+"%";
+            newNavEl.style.left = navElements[index][3]+"%";
+            newNavEl.sceneToChangeTo = navElements[index][4];
+            document.body.appendChild(newNavEl);
+            addEvent(newNavEl, "click", function(){
+              newNavEl.sceneToChangeTo.changeScene();
+              // may be a better way to do this, throws a lint error
+            });
+          }
         }
       };
-      
-      
-      /*function north() { }
-      function east() { }
-      function south() { }
-      function west() { }
-      
-      this.init = function(n, e, s, w) {
-        if(n) { this.north = new north(); }
-        if(e) { this.east = new east(); }
-        if(s) { this.south = new south(); }
-        if(w) { this.west = new west(); }
-        
-        this.north.t = n[0];
-        this.north.r = n[1];
-        this.north.b = n[2];
-        this.north.l = n[3];
-        
-        this.east.t = e[0];
-        this.east.r = e[1];
-        this.east.b = e[2];
-        this.east.l = e[3];
-        
-        this.south.t = s[0];
-        this.south.r = s[1];
-        this.south.b = s[2];
-        this.south.l = s[3];
-        
-        this.west.t = w[0];
-        this.west.r = w[1];
-        this.west.b = w[2];
-        this.west.l = w[3];
-        
-      };
-      
-      this.changeNav = function() {
-        if(this.parentScene.north) { northBtn.style.display = "block"; } else { northBtn.style.display = "none"; }
-        if(this.north.t) { northBtn.style.top = this.north.t+"%"; } else { northBtn.style.top = null; }
-        if(this.north.r) { northBtn.style.right = this.north.r+"%"; } else { northBtn.style.right = null; }
-        if(this.north.b) { northBtn.style.bottom = this.north.b+"%"; } else { northBtn.style.bottom = null; }
-        if(this.north.l) { northBtn.style.left = this.north.l+"%"; } else { northBtn.style.left = null; }
-        
-        if(this.parentScene.east) { eastBtn.style.display = "block"; } else { eastBtn.style.display = "none"; }
-        if(this.east.t) { eastBtn.style.top = this.east.t+"%"; } else { eastBtn.style.top = null; }
-        if(this.east.r) { eastBtn.style.right = this.east.r+"%"; } else { eastBtn.style.right = null; }
-        if(this.east.b) { eastBtn.style.bottom = this.east.b+"%"; } else { eastBtn.style.bottom = null; }
-        if(this.east.l) { eastBtn.style.left = this.east.l+"%"; } else { eastBtn.style.left = ""; }
-        
-        if(this.parentScene.south) { southBtn.style.display = "block"; } else { southBtn.style.display = "none"; }
-        if(this.south.t) { southBtn.style.top = this.south.t+"%"; } else { southBtn.style.top = null; }
-        if(this.south.r) { southBtn.style.right = this.south.r+"%"; } else { southBtn.style.right = null; }
-        if(this.south.b) { southBtn.style.bottom = this.south.b+"%"; } else { southBtn.style.bottom = null; }
-        if(this.south.l) { southBtn.style.left = this.south.l+"%"; } else { southBtn.style.left = null; }
-        
-        if(this.parentScene.west) { westBtn.style.display = "block"; } else { westBtn.style.display = "none"; }
-        if(this.west.t) { westBtn.style.top = this.west.t+"%"; } else { westBtn.style.top = null; }
-        if(this.west.r) { westBtn.style.right = this.west.r+"%"; } else { westBtn.style.right = null; }
-        if(this.west.b) { westBtn.style.bottom = this.west.b+"%"; } else { westBtn.style.bottom = null; }
-        if(this.west.l) { westBtn.style.left = this.west.l+"%"; } else { westBtn.style.left = null; }
-      };*/
       
     }
     
