@@ -41,16 +41,17 @@ function map(maxX, maxY, start) {
       this.navElementList = navElements;
       
       this.init = function() {
-        var index,
+        var indexRem, index,
             existingNavElements = document.getElementsByClassName("navBtn"),
             navElements = this.navElementList;
-            
-        for(index = 0; index < existingNavElements.length; index++) {
-          existingNavElements[index].remove();
+        
+        if(existingNavElements.length) {    
+          while(existingNavElements.length > 0) {
+            existingNavElements[0].remove();
+          }
         }
         
         for(index = 0; index < navElements.length; index++) {
-          console.log(navElements[index][0]);
           var newNavEl = document.createElement("BUTTON");
           newNavEl.setAttribute("class", "navBtn");
           newNavEl.style.top = navElements[index][0]+"%";
@@ -59,17 +60,13 @@ function map(maxX, maxY, start) {
           newNavEl.style.left = navElements[index][3]+"%";
           newNavEl.sceneToChangeTo = navElements[index][4];
           document.body.appendChild(newNavEl);
-          //addEvent(newNavEl, "click", newNavEl.sceneToChangeTo.changeScene() );
+          addEvent(newNavEl, "click", function(){
+            newNavEl.sceneToChangeTo.changeScene();
+          });
           //var test = document.getElementsByClassName("navBtn"); console.log(test[0].sceneToChangeTo);
         }
       };
       
-      /*this.changeNav = function() {
-        var existingNavs = document.getElementsByClassName("navBtn");
-        for(var e = 0; e < existingNavs.length; e++) {
-          existingNavs[e].remove();
-        }
-      };*/
       
       /*function north() { }
       function east() { }
