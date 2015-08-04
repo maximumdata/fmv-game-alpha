@@ -36,10 +36,42 @@ function map(maxX, maxY, start) {
     this.yPos = y;
     
     // construct an object to hold the scene's navigation. needs to contain positional information for each navigation element.
-    function nav(p) {
+    function nav(p, navElements) {
       this.parentScene = p;
+      this.navElementList = navElements;
       
-      function north() { }
+      this.init = function() {
+        var index,
+            existingNavElements = document.getElementsByClassName("navBtn"),
+            navElements = this.navElementList;
+            
+        for(index = 0; index < existingNavElements.length; index++) {
+          existingNavElements[index].remove();
+        }
+        
+        for(index = 0; index < navElements.length; index++) {
+          console.log(navElements[index][0]);
+          var newNavEl = document.createElement("BUTTON");
+          newNavEl.setAttribute("class", "navBtn");
+          newNavEl.style.top = navElements[index][0]+"%";
+          newNavEl.style.right = navElements[index][1]+"%";
+          newNavEl.style.bottom = navElements[index][2]+"%";
+          newNavEl.style.left = navElements[index][3]+"%";
+          newNavEl.sceneToChangeTo = navElements[index][4];
+          document.body.appendChild(newNavEl);
+          //addEvent(newNavEl, "click", newNavEl.sceneToChangeTo.changeScene() );
+          //var test = document.getElementsByClassName("navBtn"); console.log(test[0].sceneToChangeTo);
+        }
+      };
+      
+      /*this.changeNav = function() {
+        var existingNavs = document.getElementsByClassName("navBtn");
+        for(var e = 0; e < existingNavs.length; e++) {
+          existingNavs[e].remove();
+        }
+      };*/
+      
+      /*function north() { }
       function east() { }
       function south() { }
       function west() { }
@@ -96,18 +128,13 @@ function map(maxX, maxY, start) {
         if(this.west.r) { westBtn.style.right = this.west.r+"%"; } else { westBtn.style.right = null; }
         if(this.west.b) { westBtn.style.bottom = this.west.b+"%"; } else { westBtn.style.bottom = null; }
         if(this.west.l) { westBtn.style.left = this.west.l+"%"; } else { westBtn.style.left = null; }
-      };
+      };*/
       
     }
     
-    this.init = function(src, n, e, s, w, goN, goE, goS, goW) {
+    this.init = function(src, navElements) {
       this.videoSrc = "assets/videos/"+src+".mp4";
-      this.north = n;
-      this.east = e;
-      this.south = s;
-      this.west = w;
-      this.nav = new nav(this);
-      this.nav.init(goN, goE, goS, goW);
+      this.nav = new nav(this, navElements);
     };
     
     this.changeScene = function() {
@@ -118,12 +145,12 @@ function map(maxX, maxY, start) {
       vidSourceElement.setAttribute("src", this.videoSrc);
       player.load();
       player.play();
-        // will need to optimize the loads here. need to find a reliable way to preload videos contained in scenes.
+        //will need to optimize the loads here. need to find a reliable way to preload videos contained in scenes.
       
       // Set the current scene to this new one (nav controls are in relation to the current scene)
       currentMap.currentScene = this;
       
-      this.nav.changeNav();
+      currentMap.currentScene.nav.init();
       
     };
     

@@ -14,18 +14,23 @@ function addEvent(to, type, fn) {
 // Assign elements after page loads
   
 addEvent(window, "load", function() {
-  eastBtn = document.getElementById("east");
+  /*eastBtn = document.getElementById("east");
   westBtn = document.getElementById("west");
   northBtn = document.getElementById("north");
-  southBtn = document.getElementById("south");
+  southBtn = document.getElementById("south");*/
   play = document.getElementById("play");
+  
   
   addEvent(play, "click", function() {
     changeMap(newmap);
     this.remove();
   });
   
-  addEvent(eastBtn, "click", function() {
+  /*addEvent(navBtns, "click", function() {
+    this.sceneToChangeTo;
+  });*/
+  
+  /*addEvent(eastBtn, "click", function() {
     currentScene.east.changeScene();
   });
   
@@ -39,5 +44,5 @@ addEvent(window, "load", function() {
   
   addEvent(southBtn, "click", function() {
     currentScene.south.changeScene();
-  });
+  });*/
 });

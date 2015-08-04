@@ -8,6 +8,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var ts = require('gulp-typescript');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -36,11 +37,18 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('dev/build'));
 });
 
+gulp.task('ts', function() {
+  return gulp.src('dev/ts/**/*.ts')
+    .pipe(ts())
+    .pipe(gulp.dest('dev/build/ts'));
+});
+
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('dev/js/**/*.js', ['lint', 'scripts']);
     gulp.watch('dev/sass/**/*.sass', ['sass']);
+    gulp.watch('dev/ts/**/*.ts', ['ts']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);
+gulp.task('default', ['lint', 'sass', 'scripts', 'ts', 'watch']);
