@@ -4,3 +4,4 @@
 | - | - | - |
 | remove() | no | |
 | addEventListener() | no | |
+| el.classList.contains() | no | |
